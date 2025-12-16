@@ -30,4 +30,6 @@ FROM `users`
 INNER JOIN `tasks` ON users.userid = tasks.creator
 GROUP BY users.userid;
 
-
+--exercise 5: 
+--ik wil alle tasks die nog niet aan iemand zijn toegewezen
+SELECT * FROM `tasks` WHERE tasks.employe IS NULL;
