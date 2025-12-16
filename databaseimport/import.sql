@@ -12,9 +12,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`name`, `email`) VALUES 
 	('Shrek', 'shrek@gmail.com'),
-    ('Princess Fiona', 'fiona@gmail.com'),
+    ('Fiona', 'fiona@gmail.com'),
     ('Donkey', 'donkey@gmail.com'),
-    ('Lord Farquaad', 'farquaad@gmail.com'),
+    ('Farquaad', 'farquaad@gmail.com'),
     ('Puss in Boots', 'Boots@gmail.com');
     
 CREATE TABLE `tasks` (
@@ -60,9 +60,13 @@ CREATE TABLE usertasks (
 
 INSERT INTO `usertasks` (userid, taskid) VALUES 
 	(1, 1),
+    (1, 3),
+    (1, 6),
+    (1, 8),
+    (1, 9),
     (2, 2),
     (3, 3),
-    (1, 3),
+    (4, 4),
     (5, 5);
     
 ALTER TABLE `tasks`

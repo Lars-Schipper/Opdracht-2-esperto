@@ -21,7 +21,7 @@ FROM `tasks`
 LEFT JOIN `tasklist` ON tasks.tasklistid = tasklist.tasklistid
 LEFT JOIN `users` ON tasks.creator = users.userid
 WHERE users.userid = 1
-GROUP BY tasklist.title;
+GROUP BY users.userid;
 
 -- exercise 4:
 -- ik wil een lijst van alle users met een count hoeveel tasks ieder is toegewezen
