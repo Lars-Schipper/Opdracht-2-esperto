@@ -52,6 +52,7 @@ INSERT INTO `tasklist` (`owner`,`title`) VALUES
     (3, 'Tasklist 3');
     
 CREATE TABLE usertasks (
+    --primary key 
 	userid INT,
     taskid INT,
     FOREIGN KEY (userid) REFERENCES users(userid),
