@@ -6,7 +6,6 @@ namespace App\Repositories;
 
 use App\Database;
 use PDO;
-use Symfony\Component\VarDumper\VarDumper;
 
 class UsersRepository {
     
@@ -15,7 +14,7 @@ class UsersRepository {
     }
 
     public function getAllUsers(): array {
-         $sql = 'SELECT * FROM users';
+        $sql = 'SELECT * FROM users';
 
         $pdo = $this->database->getConnection();
 
