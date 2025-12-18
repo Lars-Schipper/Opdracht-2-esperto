@@ -7,9 +7,10 @@ use Slim\Factory\AppFactory;
 use DI\ContainerBuilder;
 use Slim\Handlers\Strategies\RequestResponseArgs;
 use App\Middleware\AddJsonResponseHeader;
-use App\Controllers\Users;
 use Slim\Routing\RouteCollectorProxy;
+use App\Controllers\Users;
 use App\Controllers\Tasks;
+use App\Controllers\Tasklists;
 
 define('APP_ROOT', dirname(__DIR__));
 
@@ -33,25 +34,27 @@ $error_handler->forceContentType('application/json');
 $app->add(new AddJsonResponseHeader);
 
 //users:
-$app->group('/api', function (RouteCollectorProxy $group) { 
+$app->group('/api', function (RouteCollectorProxy $group) {
     //get all users
     $group->get('/users', [Users::class, 'getAllUsers']);
-    
+
     //get user by id
     $group->get('/users/{id:[0-9]+}', [Users::class, 'getUserById']);
-    
+
     //create new user
-    $group->post('/users', [Users::class, 'create']);
-    
+    $group->post('/users', [Users::class, 'addUser']);
+
     //update user
-    $group->patch('/users/{id}', [Users::class, 'update']);
-    
+    $group->patch('/users/{id}', [Users::class, 'updateUser']);
+
     //delete user
-    $group->delete('/users/{id}', [Users::class, 'delete']);
+    $group->delete('/users/{id}', [Users::class, 'deleteUser']);
 
     //list of all tasklists user is the creator of
+    $group->get('/users/{id}/tasklists', [Users::class, 'getAllUserTasklists']);
 
     //lsit of tasks the user is an employe of
+    $group->get('/users/{id}/tasks', [Users::class, 'getAllUserTasks']);
 });
 
 //tasks
@@ -63,24 +66,51 @@ $app->group('/api', function (RouteCollectorProxy $group) {
     //get task by id
     $group->get('/tasks/{id}', [Tasks::class, 'getTaskById']);
 
-    //je moet een nieuwe task kunnen aanmaken
+    //create new task
     $group->post('/tasks', [Tasks::class, 'createNewTask']);
 
-    //je moet een task kunnen aanpassen
+    //edit task
+    $group->patch('/tasks/{id}', [Tasks::class, 'patchTask']);
 
-    //je moet een task kunnen verwijderen
+    //delete task
     $group->delete('/tasks/{id}', [Tasks::class, 'deleteTask']);
-    //je wilt alle users van een task kunnen zien
 
-    //je wilt users aan een task kunnen toevoegen
+    //get all users of a task
+    $group->get('/tasks/{id}/users', [Tasks::class, 'taskUsers']);
+
+    //add user to task
+    $group->post('/tasks/{id}/users/{userid}', [Tasks::class, 'taskAddUser']);
 
     //je wilt de users van een task kunnen wijzigen
+    //is deze nodig????
+    // $group->patch('/tasks/{id}/users/{userid}', [Tasks::class, 'taskChangeUser']);
 
-    //je wilt een user van een task kunnen verwijderen
+    //delete user from task
+    $group->delete('/tasks/{id}/users/{userid}', [Tasks::class, 'taskDeleteUser']);
 
-    //je wilt alle users van een task kunnen verwijderen
+    //delete all users from task
+    $group->delete('/tasks/{id}/users', [Tasks::class, 'taskDeleteAllUsers']);
 });
 
+//tasklists
+$app->group('/api', function (RouteCollectorProxy $group) {
+    //get all tasklists
+    $group->get('/tasklists', [Tasklists::class, 'getAllTasklists']);
 
+    //get one task by id
+    $group->get('/tasklists/{id}', [Tasklists::class, 'getTasklist']);
+
+    //create new tasklist
+    $group->post('/tasklists', [Tasklists::class, 'addTasklist']);
+
+    //edit tasklist
+    $group->post('/tasklists/{id}', [Tasklists::class, 'editTasklist']);
+
+    //delete tasklist
+    $group->delete('/tasklists/{id}', [Tasklists::class, 'deleteTasklist']);
+
+    //get list of users assigned to a task
+    $group->get('/tasklists/{id}/users', [Tasklists::class, 'getTasklistUsers']);
+});
 
 $app->run();
