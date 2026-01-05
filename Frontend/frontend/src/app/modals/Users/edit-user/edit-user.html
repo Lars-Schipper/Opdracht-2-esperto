@@ -1,0 +1,27 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit user</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <form class="container">
+        <div class="modal-body">
+            <div class="row mb-3">
+                <label for="name">Name: </label>
+                <input id="name" type="text" [formControl]="name" />
+            </div>
+
+            <div class="row">
+                <label for="email">Email: </label>
+                <input id="email" type="email" [formControl]="email" />
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-secondary me-3" (click)="modal.close('Cancel click')">Cancel</button>
+            <button class="btn btn-primary" (click)="modal.close('Save click')">Save</button>
+        </div>
+    </form>
+</ng-template>
+
+<button class="btn btn-outline-primary me-3" (click)="open(content)">Edit user</button>

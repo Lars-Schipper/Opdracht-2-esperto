@@ -1,0 +1,14 @@
+<nav class="bg-dark text-white p-1 ps-5 pt-2 pe-5">
+    <div class="d-flex justify-content-between">
+        <h3 class="mt-2">TaskManager</h3>
+
+        <ul class="d-flex">
+            <a class="me-3 mt-2 btn btn-primary" routerLink="/">Home</a>
+            <a class="me-3 mt-2 btn btn-dark" routerLink="/users">Users</a>
+            <a class="me-3 mt-2 btn btn-dark" routerLink="/task">Tasks</a>
+            <a class="me-3 mt-2 btn btn-dark" routerLink="/tasklists">Tasklists</a>
+        </ul>
+    </div>
+</nav>
+
+<router-outlet style="min-height: calc(100vh - 74px);" />

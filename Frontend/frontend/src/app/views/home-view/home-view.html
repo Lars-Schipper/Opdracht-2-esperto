@@ -1,0 +1,41 @@
+<div style="min-height: calc(100vh - 74px);" class="bg-secondary p-5 text-white">
+    <div class="container">
+        <h1>
+            Dashboard
+        </h1>
+        <p class="text-muted">
+            Welkom to Taskmanager
+        </p>
+
+        <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 mb-5">
+            <div class="col">
+                <app-card [type]="users.type" [amount]="users.amount" />
+            </div>
+
+            <div class="col">
+                <app-card [type]="tasks.type" [amount]="tasks.amount" />
+            </div>
+
+            <div class="col">
+                <app-card [type]="uncompletedTask.type" [amount]="uncompletedTask.amount" />
+            </div>
+
+            <div class="col">
+                <app-card [type]="tasklist.type" [amount]="tasklist.amount" />
+            </div>
+        </div>
+
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+                <h4 class="p-2">
+                    All Tasklists
+                </h4>
+            </div>
+            <div class="card-body">
+                @for (tasklist of tasklists; track $index) {
+                    <app-tasklist-card [name]="tasklist.name" [description]="tasklist.description" [amountOfTasks]="tasklist.amountOfTasks" [owner]="tasklist.owner"/>
+                }
+            </div>
+        </div>
+    </div>
+</div>
